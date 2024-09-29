@@ -8,12 +8,12 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.25.0/dist/full.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
-    <!-- Container principale -->
+    
     <div class="container mx-auto p-4">
-        <!-- Titolo -->
+     
         <h1 class="text-3xl font-bold text-center mb-4">Simulatore Carrello della Spesa</h1>
 
-        <!-- Sezione Dati Personali -->
+       
         <div class="card w-full bg-base-100 shadow-xl mb-6">
             <div class="card-body">
                 <h2 class="card-title">Inserisci i tuoi dati personali:</h2>
@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <!-- Sezione Prodotti -->
+      
         <div class="card w-full bg-base-100 shadow-xl mb-6">
             <div class="card-body">
                 <h2 class="card-title">Seleziona un prodotto:</h2>
@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        <!-- Sezione Carrello -->
+      
         <div class="card w-full bg-base-100 shadow-xl mb-6">
             <div class="card-body">
                 <h2 class="card-title">Carrello:</h2>
@@ -65,7 +65,7 @@
             </div>
         </div>
 
-        <!-- Sezione Modalità di Pagamento -->
+      
         <div class="card w-full bg-base-100 shadow-xl mb-6">
             <div class="card-body">
                 <h2 class="card-title">Procedi al pagamento:</h2>
@@ -79,24 +79,24 @@
     </div>
 
     <script>
-        // Variabili globali
+    
         let carrello = [];
         let totale = 0;
 
-        // Aggiungi prodotto al carrello
+
         document.getElementById('aggiungi-carrello').addEventListener('click', function () {
             const selezioneProdotto = document.getElementById('selezione-prodotto');
             const prodottoSelezionato = selezioneProdotto.options[selezioneProdotto.selectedIndex];
             const prezzoProdotto = parseFloat(prodottoSelezionato.value);
             const nomeProdotto = prodottoSelezionato.text;
 
-            // Aggiungi al carrello
+          
             carrello.push({ nome: nomeProdotto, prezzo: prezzoProdotto });
             totale += prezzoProdotto;
             aggiornaCarrello();
         });
 
-        // Aggiorna la visualizzazione del carrello
+
         function aggiornaCarrello() {
             const listaCarrello = document.getElementById('lista-carrello');
             listaCarrello.innerHTML = '';
@@ -117,14 +117,14 @@
             document.getElementById('totale-spesa').textContent = `${totale}€`;
         }
 
-        // Rimuovi prodotto dal carrello
+    
         function rimuoviDalCarrello(index) {
             totale -= carrello[index].prezzo;
             carrello.splice(index, 1);
             aggiornaCarrello();
         }
 
-        // Gestione pagamento
+   
         document.getElementById('paga').addEventListener('click', function () {
             const modalitaPagamento = document.getElementById('modalita-pagamento').value;
             alert(`Pagamento effettuato con ${modalitaPagamento}. Totale: ${totale}€`);
