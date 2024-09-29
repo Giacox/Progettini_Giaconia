@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema di Prenotazione Viaggio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.25.0/dist/full.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 p-10">
+    <div class="container mx-auto">
+        <h1 class="text-4xl font-bold mb-6 text-center">Sistema di Prenotazione Viaggio</h1>
+        <div class="card w-full bg-white shadow-xl p-6">
+            <form id="bookingForm">
+               
+                <h2 class="text-2xl font-semibold mb-4">Dati personali</h2>
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Nome</span>
+                        </label>
+                        <input type="text" id="nome" class="input input-bordered w-full" required>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Cognome</span>
+                        </label>
+                        <input type="text" id="cognome" class="input input-bordered w-full" required>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Email</span>
+                        </label>
+                        <input type="email" id="email" class="input input-bordered w-full" required>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Telefono</span>
+                        </label>
+                        <input type="tel" id="telefono" class="input input-bordered w-full" required>
+                    </div>
+                </div>
+
+                
+                <h2 class="text-2xl font-semibold my-4">Seleziona la Destinazione</h2>
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text">Destinazione</span>
+                    </label>
+                    <select id="destinazione" class="select select-bordered w-full">
+                        <option value="Parigi|200">Parigi - €200</option>
+                        <option value="Londra|250">Londra - €250</option>
+                        <option value="New York|500">New York - €500</option>
+                        <option value="Tokyo|600">Tokyo - €600</option>
+                        <option value="Budapest|470">Budapest - €470</option>
+                    </select>
+                </div>
+
+                
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-2 my-4">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Data di Partenza</span>
+                        </label>
+                        <input type="date" id="dataPartenza" class="input input-bordered w-full" required>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Numero di Passeggeri</span>
+                        </label>
+                        <input type="number" id="passeggeri" class="input input-bordered w-full" min="1" value="1" required>
+                    </div>
+                </div>
+
+                
+                <button type="button" class="btn btn-primary w-full mt-4" onclick="riepilogoPrenotazione()">Prenota ora</button>
+            </form>
+
+
+            
+            <div id="riepilogo" class="hidden mt-6">
+                <h2 class="text-2xl font-semibold mb-4">Riepilogo Prenotazione</h2>
+                <p id="riepilogoNome"></p>
+                <p id="riepilogoDestinazione"></p>
+                <p id="riepilogoData"></p>
+                <p id="riepilogoPasseggeri"></p>
+                <p id="riepilogoTotale" class="font-bold text-lg mt-2"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function riepilogoPrenotazione() {
+            
+            const nome = document.getElementById("nome").value;
+            const cognome = document.getElementById("cognome").value;
+            const email = document.getElementById("email").value;
+            const telefono = document.getElementById("telefono").value;
+            const destinazioneElement = document.getElementById("destinazione");
+            const destinazione = destinazioneElement.options[destinazioneElement.selectedIndex].text.split(" - ")[0];
+            const prezzo = destinazioneElement.value.split("|")[1];
+            const dataPartenza = document.getElementById("dataPartenza").value;
+            const passeggeri = document.getElementById("passeggeri").value;
+
+            
+            if (nome === "" || cognome === "" || email === "" || telefono === "" || dataPartenza === "" || passeggeri < 1) {
+                
+                alert("Compila tutti i campi");
+    
+                return;
+            }
+
+           
+            
+            const totale = prezzo * passeggeri;
+
+            
+            document.getElementById("riepilogoNome").innerText = `Nome: ${nome} ${cognome}`;
+            document.getElementById("riepilogoDestinazione").innerText = `Destinazione: ${destinazione}`;
+            document.getElementById("riepilogoData").innerText = `Data di Partenza: ${dataPartenza}`;
+            document.getElementById("riepilogoPasseggeri").innerText = `Numero di Passeggeri: ${passeggeri}`;
+            document.getElementById("riepilogoTotale").innerText = `Totale: €${totale}`;
+
+            
+            document.getElementById("riepilogo").classList.remove("hidden");
+        }
+    </script>
+</body>
+
+</html>
